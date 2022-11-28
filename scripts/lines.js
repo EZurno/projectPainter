@@ -31,5 +31,5 @@ function onClick(event) {
   ctx.stroke();
 }
 
-canvas.addEventListener("onClick", onClick);
+canvas.addEventListener("mousemove", onClick);
 // 마우스 클릭 지점을 알기 위해 eventListener 사용
