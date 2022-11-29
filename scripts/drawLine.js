@@ -5,13 +5,22 @@ const color = document.querySelector("#color");
 const colorOptions = Array.from(
   document.getElementsByClassName("color_option")
 );
+
 //colorOption은 배열로 받아야 됨, color-option이 htmlCollection[]으로 주기 때문
 
-canvas.width = 600;
-canvas.height = 600;
+const modeBtn = document.querySelector("#mode_btn");
+const eraseAllBtn = document.querySelector("#eraseAll_btn");
+const eraseBtn = document.querySelector("#erase_btn");
+
+const CANVAS_WIDTH = 600;
+const CANVAS_HEIGHT = 600;
+
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
 
 let isPainting = false;
+let isFilling = false;
 
 function onMove(event) {
   if (isPainting) {
@@ -49,12 +58,44 @@ function onColorClick(event) {
   color.value = colorValue;
 }
 
+function onModeClick() {
+  if (isFilling) {
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+  } else {
+    isFilling = true;
+    modeBtn.innerText = "Draw";
+  }
+}
+
+function onCanvasClick() {
+  if (isFilling) {
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  }
+}
+
+function onEraseClick() {
+  ctx.strokeStyle = "white";
+  isFilling = false;
+  modeBtn.innerText = "white";
+}
+
+function onEraseAllClick() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
+canvas.addEventListener("click", onCanvasClick);
+eraseAllBtn.addEventListener("click", onEraseAllClick);
+eraseBtn.addEventListener("click", onEraseClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
 
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
+
+modeBtn.addEventListener("click", onModeClick);
