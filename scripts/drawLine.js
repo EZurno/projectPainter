@@ -18,6 +18,8 @@ const CANVAS_HEIGHT = 600;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
+//선이 뾰족한걸 둥글게 바꿔줌
 
 let isPainting = false;
 let isFilling = false;
