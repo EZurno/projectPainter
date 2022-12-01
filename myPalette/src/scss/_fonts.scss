@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+$paletteColor: #e2ad8c;
+$backgroundColor: #e8ddd6;
+
+@mixin font1() {
+  font-family: "Indie Flower", cursive;
+}
+
+@mixin font2() {
+  font-family: "Permanent Marker", cursive;
+}
+
+@mixin shadow() {
+  box-shadow: 12px 30px rgba($paletteColor, $alpha: 0.3);
+}
